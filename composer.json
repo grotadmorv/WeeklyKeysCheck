@@ -10,6 +10,12 @@
     "require": {
         "ext-json": "^1.7",
         "ext-zlib": "^7.3",
-        "team-reflex/discord-php": "^5.1"
+        "team-reflex/discord-php": "^5.1",
+        "vlucas/phpdotenv": "^5.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "WeeklyCheckKeys\\": "src/"
+        }
     }
 }
