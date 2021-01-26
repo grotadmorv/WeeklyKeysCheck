@@ -1,0 +1,15 @@
+{
+    "name": "sahra/weekly-check",
+    "description": "Weekly Check Keys Discord Bot API Raider io",
+    "authors": [
+        {
+            "name": "Sahra Vadrot",
+            "email": "apexp@hotmail.fr"
+        }
+    ],
+    "require": {
+        "ext-json": "^1.7",
+        "ext-zlib": "^7.3",
+        "team-reflex/discord-php": "^5.1"
+    }
+}
