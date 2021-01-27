@@ -5,8 +5,12 @@ namespace WeeklyCheckKeys;
 use Dotenv\Dotenv;
 use Discord\Discord;
 use Discord\WebSockets\Event;
+use Prooph\ServiceBus\QueryBus;
 use Discord\Parts\Channel\Channel;
-use WeeklyCheckKeys\Utils\CommandCheck;
+use WeeklyCheckKeys\Action\RunCommand;
+use WeeklyCheckKeys\Utils\CommandValidator;
+use WeeklyCheckKeys\Action\RunCommandHandler;
+use Prooph\ServiceBus\Plugin\Router\QueryRouter;
 
 class WeeklyCheckBot
 {
@@ -20,6 +24,11 @@ class WeeklyCheckBot
      */
     private $channel = null;
 
+    /**
+     * @var string
+     */
+    private $message = null;
+
     public function __construct()
     {
         $dotenv = Dotenv::createImmutable(__DIR__.'/..//', '.env.local');
@@ -32,18 +41,22 @@ class WeeklyCheckBot
         $discord = new Discord([
             'token' => $this->discordToken,
         ]);
-        
         $discord->on('ready', function ($discord) {
-            echo "Bot is ready!", PHP_EOL;
-        
             $discord->on('message', function ($message, $discord) {
-                if(true === CommandCheck::verify($message->content)){
+                if(true === CommandValidator::verify($message->content)){
                     echo "{$message->author->username}: {$message->content}",PHP_EOL;
-                    $this->channel = $message->channel;
+                    $commandBus = new QueryBus();
+                    $router = new QueryRouter();
+                    $router->route('WeeklyCheckKeys\Action\RunCommand')->to(new RunCommandHandler());
+                    $router->attachToMessageBus($commandBus);
+                    $promise = $commandBus->dispatch(new RunCommand($message->content));
+                    $promise->then(function($result){
+                        $this->message = $result;
+                    });
 
-                    $this->channel->sendMessage('Hello, world!', false)->done(function (Message $callback) {
-                        var_dump($callback);
-                    });   
+                    $this->channel = $message->channel;
+                    $this->channel->sendMessage($this->message, false)->done(function (Message $callback) {
+                    }); 
                 }
             });
         });

@@ -2,9 +2,17 @@
 
 namespace WeeklyCheckKeys\Utils;
 
-class CommandCheck
+class CommandValidator
 {
-    const COMMAND = ['weeklycheckroster', 'weeklycheck'];
+    const COMMAND_WEEKLY_CHECK = 'weeklycheck';
+    const COMMAND_WEEKLY_CHECK_ROSTER = 'weeklycheckroster';
+    const COMMAND_HELP = 'help';
+    const COMMAND = [
+        self::COMMAND_WEEKLY_CHECK, 
+        self::COMMAND_WEEKLY_CHECK_ROSTER,
+        self::COMMAND_HELP
+    ];
+
     public function __construct()
     {
         $dotenv = Dotenv::createImmutable(__DIR__.'/..//', '.env.local');
@@ -25,5 +33,10 @@ class CommandCheck
             return true;
         }
         return false;
+    }
+
+    public static function getCommandBase(string $message): string
+    {
+        return strtok(substr($message, 1), " ");
     }
 }
