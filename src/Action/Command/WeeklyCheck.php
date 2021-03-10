@@ -5,7 +5,7 @@ namespace WeeklyCheckKeys\Action\Command;
 use Prooph\Common\Messaging\Command;
 use WeeklyCheckKeys\Action\Command\CommandInterface;
 
-class WeeklyCheckRoster extends Command implements CommandInterface
+class WeeklyCheck extends Command implements CommandInterface
 {
     /**
      * @var string
@@ -17,28 +17,18 @@ class WeeklyCheckRoster extends Command implements CommandInterface
      */
     private $content;
 
-    protected $messageName = 'WeeklyCheckKeys\Action\Command\WeeklyCheckRoster';
+    protected $messageName = 'WeeklyCheckKeys\Action\Command\WeeklyCheck';
 
     
 
     public function __construct()
     {
-        $this->alias = 'weeklycheckroster';
+        $this->alias = 'weeklycheck';
     }
 
     public function getAlias(): string
     {
         return $this->alias;
-    }
-
-    public function addContent(string $content): void
-    {
-        $this->content = $content;
-    }
-
-    public function getContent(): string
-    {
-        return $this->content;
     }
 
     /**
@@ -55,5 +45,15 @@ class WeeklyCheckRoster extends Command implements CommandInterface
     protected function setPayload(array $payload): void
     {
         $this->text = $payload['text'];
+    }
+
+    public function addContent(string $content): void
+    {
+        $this->content = $content;
+    }
+
+    public function getContent(): string
+    {
+        return $this->content;
     }
 }

@@ -8,14 +8,14 @@ class CommandCollection
 
     public function __construct()
     {
-        foreach (glob(__DIR__.'/Action/Command/*.php') as $file)
+        foreach (glob(__DIR__.'/Action/Command/Weekly*.php') as $file)
         {
             $class = 'WeeklyCheckKeys\Action\Command\\'.basename($file, '.php');
-            if (class_exists($class))
+            if (class_exists($class) && !strpos($class, 'Handler'))
             {
                 $obj = new $class;
-                $class = new \ReflectionClass($obj);
-                $this->commands[$obj->getAlias()] = $class->getName();
+                $reflexionClass = new \ReflectionClass($obj);
+                $this->commands[$obj->getAlias()] = $reflexionClass->getName();
             }
         }
     }
