@@ -136,4 +136,14 @@ class Player
     {
         return $this->response;
     }
+
+    public function getTotalDungeon(): int
+    {
+        return $this->totalDungeon;
+    }
+
+    public function getBestMythicLevel(): int
+    {
+        return $this->bestMythicLevel;
+    }
 }

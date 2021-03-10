@@ -1,0 +1,14 @@
+{
+    "roster" : [
+        {
+            "name": "Gilaitjone",
+            "realm": "Elune",
+            "region": "eu"
+        },
+        {
+            "name": "Rasiak",
+            "realm": "Elune",
+            "region": "eu"
+        }
+    ]
+}
