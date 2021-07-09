@@ -26,4 +26,9 @@ class Template
     {
         return self::getMessageConfig()[ErrorCode::ERROR_WEEKLY_CHECK_ARGS_NOT_ACCEPTABLE];
     }
+
+    public static function getHelpMessage(): string 
+    {
+        return self::getMessageConfig()['message_help'];
+    }
 }

@@ -16,7 +16,7 @@ class RunCommandHandler
      *
      * @var string
      */
-    private $response;
+    private $response = '';
 
     public function __invoke(RunCommand $command, Deferred $deferred)
     {

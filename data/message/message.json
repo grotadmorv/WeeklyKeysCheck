@@ -1,5 +1,6 @@
 {
     "player_no_keys" : "Nombre de clés : 0, quelle sombre merde",
     "weekly_args_not_acceptable": "Arguments invalides, pour les 3 de qi c'est : ;weeklycheck <region> <realm> <name>",
-    "message_weekly" : "Cette semaine pour %s : \n Total de donjon : %s \n Clé maximum : %s \n Nom de la clé : %s \n Fait le : %s \n En : %s "
+    "message_weekly" : "Cette semaine pour %s : \n Total de donjon : %s \n Clé maximum : %s \n Nom de la clé : %s \n Fait le : %s \n En : %s ",
+    "message_help": "Commandes disponible : \n weeklycheckroster \n weeklycheck <realm> <region> <name>"
 }
